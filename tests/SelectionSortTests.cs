@@ -3,10 +3,10 @@ namespace Template.Tests;
 public class SelectionSortTests
 {
     [Theory]
-    [MemberData(nameof(GetSortTestData))]
-    public void SortTest(List<int> arr, List<int> expected)
+    [ClassData(typeof(SortTestData))]
+    public void SortTest(int[] arr, int[] expected)
     {
-        var result = SelectionSort.Sort(arr);
+        var result = SelectionSort.Sort(arr.ToList());
 
         Assert.Equal(expected, result);
     }
@@ -18,13 +18,6 @@ public class SelectionSortTests
         var result = SelectionSort.FindMinIndex(arr, start);
 
         Assert.Equal(expected, result);
-    }
-
-    public static IEnumerable<TheoryDataRow<List<int>, List<int>>> GetSortTestData()
-    {
-        yield return ([1, 2, 3], [1, 2, 3]);
-        yield return ([3, 2, 1], [1, 2, 3]);
-        yield return ([9, 3, 2, 1, 4, 5, 6, 7, 8, 0], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }
 
     public static IEnumerable<TheoryDataRow<List<int>, int, int>> GetFindMaxIndexTestData()
