@@ -1,4 +1,4 @@
-namespace Template.Selection;
+namespace Template;
 
 public class SelectionSort
 {
