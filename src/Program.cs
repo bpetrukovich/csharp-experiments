@@ -1,3 +1,3 @@
 ﻿using Template;
 
-new ArrayListBoxing();
+new Attributes();
