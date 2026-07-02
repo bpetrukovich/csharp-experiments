@@ -45,16 +45,18 @@ public class AlphabetOnlyAttribute : CustomValidationAttribute<string>
 }
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public abstract class CustomValidationAttribute<T> : CustomValidationAttribute where T : class
+public abstract class CustomValidationAttribute<T> : CustomValidationAttribute
 {
     public abstract bool Validate(T value);
 
-    public override bool Validate(object? value)
+    public sealed override bool Validate(object? value)
     {
-        var typed = value as T;
-        ArgumentNullException.ThrowIfNull(typed);
+        if (value is null)
+        {
+            return true;
+        }
 
-        return Validate(typed);
+        return value is T typed ? Validate(typed) : false;
     }
 }
 
